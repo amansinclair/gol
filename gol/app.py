@@ -1,18 +1,22 @@
 import tkinter as tk
 import numpy as np
 from PIL import Image, ImageTk
-import matplotlib.pyplot as plt
+
+HEIGHT = 900
+WIDTH = 900
 
 
 class GOL:
-    def __init__(self, a=None):
-        if a:
-            self.a = a
-        else:
-            self.a = self.create_random()
+    def __init__(self):
+        self.set_board(self.create_random())
 
-    def scale(self, a, scale=40):
-        return a.repeat(scale, axis=0).repeat(scale, axis=1)
+    def set_board(self, a):
+        self.a = a
+        self.a[np.where(a > 0)] = 255
+        self.scale = (HEIGHT - 100) // self.a.shape[0]
+
+    def scale_array(self, a):
+        return a.repeat(self.scale, axis=0).repeat(self.scale, axis=1)
 
     def create_random(self):
         size = 20
@@ -27,7 +31,7 @@ class GOL:
         for row in range(self.a.shape[0]):
             for col in range(self.a.shape[1]):
                 self.a[row, col] = self.update_pixel(a, row, col)
-        return self.scale(self.a)
+        return self.scale_array(self.a)
 
     def update_pixel(self, a, row, col):
         old_state = a[row, col]
@@ -59,12 +63,14 @@ def update(root, gol, canvas):
     root.after(100, update, root, gol, canvas)
 
 
-if __name__ == "__main__":
-    gol = GOL()
+def run(gol):
     root = tk.Tk()
-    img = ImageTk.PhotoImage(image=Image.fromarray(gol.update()))
-    canvas = tk.Canvas(root, width=900, height=900)
-    canvas.create_image(50, 50, anchor="nw", image=img)
+    start_array = gol.scale_array(gol.a)
+    img = ImageTk.PhotoImage(image=Image.fromarray(start_array))
+    x = (WIDTH - start_array.shape[0]) // 2
+    y = (HEIGHT - start_array.shape[1]) // 2
+    canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT)
+    canvas.create_image(x, y, anchor="nw", image=img)
     canvas.pack()
     update(root, gol, canvas)
     root.mainloop()
