@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 import numpy as np
 from PIL import Image, ImageTk
@@ -60,7 +61,7 @@ def update(root, gol, canvas):
     a = gol.update()
     img = ImageTk.PhotoImage(image=Image.fromarray(a))
     canvas.create_image(50, 50, anchor="nw", image=img)
-    root.after(100, update, root, gol, canvas)
+    root.after(30, update, root, gol, canvas)
 
 
 def run(gol):
