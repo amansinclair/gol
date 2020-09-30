@@ -57,4 +57,4 @@ class LWSS(Pattern):
     cols = [1, 2, 3, 4, 0, 4, 4, 0, 3]
 
 
-pattern_list = [Blinker(), Toad(), Beacon(), Ant(), LWSS(), Pulsar()]
+PATTERNS = [Blinker(), Toad(), Beacon(), Ant(), LWSS(), Pulsar()]

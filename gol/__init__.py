@@ -1,2 +1,2 @@
 from .app import run, GOL
-from .patterns import Blinker, Toad, Beacon, Ant, LWSS, Pulsar, patterns_list
+from .patterns import PATTERNS, Blinker, Toad, Beacon, Ant, LWSS, Pulsar, 
