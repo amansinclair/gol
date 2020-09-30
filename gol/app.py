@@ -8,10 +8,10 @@ WIDTH = 900
 
 
 class GOL:
-    def __init__(self, alive_cells=None, size=None, coverage=None):
-        if not alive_cells:
-            alive_cells = self.create_random(size, coverage)
-        self.set_board(alive_cells)
+    def __init__(self, board=None, size=None, coverage=None):
+        if not hasattr(board, "shape"):
+            board = self.create_random_board(size, coverage)
+        self.set_board(board)
 
     def set_board(self, a):
         self.a = a
@@ -21,7 +21,7 @@ class GOL:
     def scale_array(self, a):
         return a.repeat(self.scale, axis=0).repeat(self.scale, axis=1)
 
-    def create_random(self, size=None, coverage=None):
+    def create_random_board(self, size=None, coverage=None):
         size = size if size else 20
         coverage = coverage if coverage else int(0.8 * (size ** 2))
         a = np.zeros((size, size), dtype="int")

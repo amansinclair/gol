@@ -12,6 +12,10 @@ class Pattern:
         self.mask[(self.rows, self.cols)] = 1
 
     def add_to(self, a, row, col):
+        n_rows, n_cols = self.mask.shape
+        max_rows, max_cols = a.shape
+        row = min(n_rows + row, max_rows - n_rows)
+        col = min(n_cols + col, max_cols - n_cols)
         a[row : row + self.mask.shape[0], col : col + self.mask.shape[1]] = self.mask
 
 
