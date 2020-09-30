@@ -23,7 +23,7 @@ class GOL:
         return self.board.repeat(self.scale, axis=0).repeat(self.scale, axis=1)
 
     def create_random_board(self, size=None, coverage=None):
-        size = size if size else 20
+        size = size if size else 100
         board = np.zeros((size, size), dtype="int")
         coverage = coverage if coverage else 0.5
         self.add_random_cells(coverage, board)
