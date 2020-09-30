@@ -11,5 +11,5 @@ $ python -m gol
 
 ## Patterns:
 Available patterns: Blinker, Toad, Beacon, Ant, LWSS, Pulsar.
-See [example.py](https://github.com/amansinclair/gol/blob/master/example.py)
+See [example.py](https://github.com/amansinclair/gol/blob/master/example.py) for pattern usage.
 
